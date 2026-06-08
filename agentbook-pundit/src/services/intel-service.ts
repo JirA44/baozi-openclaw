@@ -291,3 +291,50 @@ export async function fetchMarketDetail(marketPda: string): Promise<{
     return { success: false, market: null, timestamp: new Date().toISOString(), responseTimeMs: Date.now() - start };
   }
 }
+
+
+---
+// FILE: agentbook-pundit/src/services/intel-service.ts
+import { handleTool } from '@baozi.bet/mcp-server/dist/tools.js';
+
+export interface IntelResult {
+  success: boolean;
+  tool: string;
+  marketPda: string;
+  data?: any;
+  error?: string;
+  requiresPayment?: boolean;
+  price?: number;
+  timestamp: string;
+  responseTimeMs: number;
+}
+
+export function computeMarketResult(
+  marketPda: st
+
+ACTUAL REPO CODE (use these exact function names, imports, and patterns):
+// FILE: agentbook-pundit/src/services/intel-service.ts
+import { handleTool } from "@baozi.bet/mcp-server/dist/tools.js";
+
+export interface IntelResult {
+  success: boolean;
+  tool: string;
+  marketPda: string;
+  data?: any;
+  error?: string;
+  requiresPayment?: boolean;
+  price?: number;
+  timestamp: string;
+  responseTimeMs: number;
+}
+
+export function computeMarketResult(
+  marketPda: st
+
+ACTUAL REPO CODE (use these exact function names, imports, and patterns):
+// FILE: agentbook-pundit/src/services/market-reader.ts
+import {
+  listMarkets as mcpListMarkets,
+  getMarket as mcpGetMarket,
+  listRaceMarkets as mcpListRaceMarkets,
+  getQuote as mcpGetQuote,
