@@ -290,3 +290,47 @@ export class MarketReader {
     };
   }
 }
+
+
+(no comments)
+---
+// FILE: agentbook-pundit/src/services/market-reader.ts
+import {
+  listMarkets as mcpListMarkets,
+  getMarket as mcpGetMarket,
+  listRaceMarkets as mcpListRaceMarkets,
+  getQuote as mcpGetQuote,
+  getRaceMarket as mcpGetRaceMarket,
+  getRaceQuote as mcpGetRaceQuote,
+} from "./mcp-client.js";
+import type { Market, MarketOutcome, Quote, RaceMarket } from "../types/index.js";
+
+export interface MarketReaderConfig {
+  // Config kept for API compatibility but no longer needs http/proxy settings
+}
+
+export class MarketReader {
+  constructor(_config: MarketReaderConfig = {}) {}
+
+  /**
+   * List active markets with optional filters.
+   */
+  async listMarkets(options: {
+    status?: string;
+    layer?: string;
+    query?: string;
+    limit?: number;
+  } = {}): Promise<Market[]> {
+    try {
+      const rawMarkets = await mcpListMarkets(options.status || "active");
+      if (!rawMarkets || !Array.isArray(rawMarkets)) {
+        return [];
+      }
+
+      let markets = rawMarkets.map((m: any) => this.normalizeMarket(m));
+
+      // Apply client-side filters
+      if (option
+---
+// FILE: agentbook-pundit/src/services/market-quotes.ts
+import { formatSol, formatPercent }
