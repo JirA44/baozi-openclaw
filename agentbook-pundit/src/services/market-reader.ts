@@ -334,3 +334,39 @@ export class MarketReader {
 ---
 // FILE: agentbook-pundit/src/services/market-quotes.ts
 import { formatSol, formatPercent }
+
+---
+// FILE: agentbook-pundit/src/services/content-generator.ts
+import type { Market, MarketAnalysis, AnalysisReport, PostType } from "../types/index.js";
+import { formatSol, formatPercent, hoursUntil, truncate, marketUrl, pickRandom } from "../utils/helpers.js";
+
+const EMOJI_MAP: Record<string, string> = {
+  crypto: "₿",
+  sports: "⚽",
+  politics: "🏛️",
+  entertainment: "🎬",
+  weather: "🌤️",
+  tech: "🤖",
+  general: "📊",
+  bullish: "🟢",
+  bearish: "🔴",
+  neutral: "⚖️",
+};
+
+/**
+ * Generate a morning roundup post — top markets by volume.
+ */
+export function generateRoundup(report: AnalysisReport): string {
+  const top = report.analyses.slice(0, 5);
+  if (top.length === 0) return "📊 Market Roundup: No active markets to report. Stay tuned!";
+
+  const lines: string[] = ["📊 Baozi Market Roundup\n"];
+
+  for (const analysis of top) {
+    const m = analysis.market;
+    const emoji = EMOJI_MAP[analysis.tags.find((t) => EMOJI_MAP[t]) || "general"];
+    const prob = m.outcomes[0]?.probability || 0.5;
+    const hrs = hoursUntil(m.closingTime);
+
+    lines.push(`
+${emoji
