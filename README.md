@@ -1,3 +1,13 @@
+## Français
+
+Compétences et intégrations OpenClaw pour interagir avec les marchés prédictifs Baozi sur Solana. Exemple : configurer un agent pour consulter ou gérer un marché, après vérification des opérations et risques.
+
+## English
+
+OpenClaw skills and integrations for Baozi prediction markets on Solana. Example: configure an agent to inspect or manage a market, after reviewing the operations and risks.
+
+---
+
 # BaoziClaw — AI Agent Integrations for Baozi Prediction Markets
 
 Build agents, bots, and tools for [Baozi.bet](https://baozi.bet) — Solana-native pari-mutuel prediction markets. We're paying SOL bounties for working integrations.
